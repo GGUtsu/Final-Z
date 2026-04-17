@@ -16,41 +16,32 @@ public class HitZone : MonoBehaviour
 
     void Update()
     {
-        // 1. จังหวะที่นิ้วกดปุ่มลงไป (เปลี่ยนสี + เช็คตีโน้ต)
+        // จังหวะกดปุ่ม
         if (Input.GetKeyDown(hitKey))
         {
-            // เปลี่ยนสีปุ่มให้ดูเหมือนโดนกด
             if (buttonGraphic != null) buttonGraphic.color = pressedColor; 
 
-            // --- ระบบเช็คการตีโน้ต ---
+            // ถ้ามีโน้ตในกล่อง
             if (notesInZone.Count > 0)
             {
                 GameObject noteToHit = notesInZone[0];
                 float distance = Mathf.Abs(noteToHit.transform.position.x - transform.position.x);
 
-                // --- เปลี่ยนมาเรียก GameManager แบบใหม่ --- (เพิ่ม transform เข้าไป)
+                // --- เปลี่ยนตัวเลขคะแนนตรงนี้ครับ ---
                 if (distance <= 0.5f) 
                 {
-                    if(GameManager.instance != null) 
-                    {
-                        GameManager.instance.AddScore(100);
+                    // ระยะแม่นยำ = Perfect (ได้ฐาน 1000 คะแนน)
+                    if(GameManager.instance != null) {
+                        GameManager.instance.AddScore(1000); 
                         GameManager.instance.ShowJudgment("Perfect", transform); 
-                    }
-                }
-                else if (distance <= 1.5f) 
-                {
-                    if(GameManager.instance != null) 
-                    {
-                        GameManager.instance.AddScore(50);
-                        GameManager.instance.ShowJudgment("Great", transform); 
                     }
                 }
                 else 
                 {
-                    if(GameManager.instance != null) 
-                    {
-                        GameManager.instance.ResetCombo();
-                        GameManager.instance.ShowJudgment("Miss", transform); 
+                    // ระยะ Great (ได้ฐาน 500 คะแนน หรือจะปรับตาม GDD ก็ได้ครับ)
+                    if(GameManager.instance != null) {
+                        GameManager.instance.AddScore(500); 
+                        GameManager.instance.ShowJudgment("Great", transform); 
                     }
                 }
 
@@ -59,7 +50,7 @@ public class HitZone : MonoBehaviour
             }
         }
 
-        // 2. จังหวะที่ปล่อยนิ้วออกจากปุ่ม (ให้สีกลับมาเป็นปกติ)
+        // จังหวะปล่อยปุ่ม
         if (Input.GetKeyUp(hitKey))
         {
             if (buttonGraphic != null) buttonGraphic.color = defaultColor;
@@ -77,13 +68,13 @@ public class HitZone : MonoBehaviour
     {
         if (other.CompareTag("Note") && notesInZone.Contains(other.gameObject))
         {
-            if(GameManager.instance != null)
+            if (GameManager.instance != null)
             {
                 GameManager.instance.ResetCombo();
                 GameManager.instance.ShowJudgment("Miss", transform); // เพิ่ม transform เข้าไป
             }
             notesInZone.Remove(other.gameObject);
-            Destroy(other.gameObject); 
+            Destroy(other.gameObject);
         }
     }
 }

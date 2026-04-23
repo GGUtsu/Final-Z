@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
     public GameObject victoryPanel;
     private bool isGameOver = false; // เอาไว้เช็คว่าเกมจบหรือยัง
 
+    // 👇👇👇 สิ่งที่เพิ่มเข้ามาใหม่: ระบบเพลง 👇👇👇
+    [Header("ระบบเพลง")]
+    public AudioSource bgm;
+    // 👆👆👆 ============================== 👆👆👆
+
     private bool isShuttingDown = false;
 
     void Awake()
@@ -37,7 +42,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // ตั้งค่าเลือดเริ่มต้น
         currentHP = maxHP;
         if (hpSlider != null)
         {
@@ -45,43 +49,44 @@ public class GameManager : MonoBehaviour
             hpSlider.value = currentHP;
         }
 
-        // ซ่อนหน้าจอจบเกมตอนเริ่ม
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
         if (victoryPanel != null) victoryPanel.SetActive(false);
 
-        Time.timeScale = 1f; // ทำให้เวลาเดินปกติ
+        Time.timeScale = 1f; 
 
         UpdateUI();
     }
 
+    // 👇👇👇 สิ่งที่เพิ่มเข้ามาใหม่: เช็คเพลงจบ 👇👇👇
+    void Update()
+    {
+        // ถ้าเกมยังไม่จบ และมีการใส่เพลงไว้
+        if (!isGameOver && bgm != null)
+        {
+            // ถ้าเพลงหยุดเล่นแล้ว (เล่นจนจบเพลง)
+            if (!bgm.isPlaying)
+            {
+                Victory(); // สั่งให้ชนะทันที!
+            }
+        }
+    }
+    // 👆👆👆 ============================== 👆👆👆
+
     public void AddScore(int baseAmount)
     {
-        if (isGameOver) return; // ถ้าตายแล้ว ไม่ต้องบวกคะแนนเพิ่ม
+        if (isGameOver) return; 
 
         combo++; 
 
-        // ระบบคูณคะแนนสไตล์ Muse Dash: เพิ่มโบนัส 10% ทุกๆ 10 คอมโบ (สูงสุด 50%)
-        float multiplier = 1.0f; // เริ่มต้นที่ 100% ของคะแนนปกติ
+        float multiplier = 1.0f; 
 
-        if (combo >= 50) {
-            multiplier = 1.5f; // คอมโบ 50 ขึ้นไป ได้คะแนน 150%
-        }
-        else if (combo >= 40) {
-            multiplier = 1.4f; // คอมโบ 40-49 ได้คะแนน 140%
-        }
-        else if (combo >= 30) {
-            multiplier = 1.3f; // คอมโบ 30-39 ได้คะแนน 130%
-        }
-        else if (combo >= 20) {
-            multiplier = 1.2f; // คอมโบ 20-29 ได้คะแนน 120%
-        }
-        else if (combo >= 10) {
-            multiplier = 1.1f; // คอมโบ 10-19 ได้คะแนน 110%
-        }
+        if (combo >= 50) multiplier = 1.5f; 
+        else if (combo >= 40) multiplier = 1.4f; 
+        else if (combo >= 30) multiplier = 1.3f; 
+        else if (combo >= 20) multiplier = 1.2f; 
+        else if (combo >= 10) multiplier = 1.1f; 
 
-        // เอาคะแนนมาคูณ แล้วปัดเศษให้เป็นเลขจำนวนเต็มล้วนๆ
         int finalScore = Mathf.RoundToInt(baseAmount * multiplier);
-        
         score += finalScore;
 
         UpdateUI();
@@ -89,20 +94,15 @@ public class GameManager : MonoBehaviour
 
     public void ResetCombo()
     {
-        if (isGameOver) return; // ถ้าตายแล้ว ไม่ต้องอัปเดตคอมโบ
+        if (isGameOver) return; 
         combo = 0;
         UpdateUI();
     }
 
     void UpdateUI()
     {
-        // 1. จัดการตัวเลขคะแนน (Score)
-        if (scoreText != null) 
-        {
-            scoreText.text = score.ToString("D6"); 
-        }
+        if (scoreText != null) scoreText.text = score.ToString("D6"); 
 
-        // 2. จัดการตัวเลขคอมโบ (Combo)
         if (comboText != null) 
         {
             if (combo > 0) 
@@ -117,7 +117,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // --- ฟังก์ชันลดเลือดเวลาตีพลาด ---
     public void TakeDamage(int damageAmount)
     {
         if (isGameOver || isShuttingDown) return; 
@@ -132,54 +131,44 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // --- ฟังก์ชันเพิ่มเลือดเมื่อตีโดน ---
     public void Heal(int healAmount)
     {
         if (isGameOver || isShuttingDown) return;
 
         currentHP += healAmount;
-
-        // ป้องกันไม่ให้เลือดเกินค่าสูงสุดที่ตั้งไว้ (Max HP)
         if (currentHP > maxHP) currentHP = maxHP;
 
-        // อัปเดตหลอดเลือดบนจอ
         if (hpSlider != null) hpSlider.value = currentHP;
     }
 
-    // --- ฟังก์ชันแพ้ ---
     public void GameOver()
     {
         isGameOver = true;
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
-        Time.timeScale = 0f; // หยุดเวลาในเกม
+        Time.timeScale = 0f; 
     }
 
-    // --- ฟังก์ชันชนะ ---
     public void Victory()
     {
         if (isGameOver) return; 
         isGameOver = true;
         if (victoryPanel != null) victoryPanel.SetActive(true);
-        Time.timeScale = 0f; // หยุดเวลาในเกม
+        Time.timeScale = 0f; 
     }
 
-    // --- ฟังก์ชันสำหรับผูกกับปุ่ม เล่นใหม่ ---
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
         Time.timeScale = 1f; 
     }
 
-    // เพิ่มฟังก์ชันเช็คสถานะการปิดเกม
     void OnApplicationQuit()
     {
         isShuttingDown = true; 
     }
 
-    // ฟังก์ชันรับค่า 2 อย่าง: type (รูปอะไร) และ spawnLocation (ตำแหน่งเลนไหน)
     public void ShowJudgment(string type, Transform spawnLocation)
     {
-        // --- เพิ่มบรรทัดนี้เพื่อดักไว้ ---
         if (isShuttingDown) return;
 
         GameObject prefabToSpawn = null;
@@ -190,9 +179,7 @@ public class GameManager : MonoBehaviour
 
         if (prefabToSpawn != null && spawnLocation != null)
         {
-            // แกน X ใส่ -1.5f เพื่อให้ขยับซ้าย, แกน Y ใส่ 1.5f เพื่อให้ลอยขึ้น
             Vector3 offsetPos = spawnLocation.position + new Vector3(-1.5f, 1.5f, 0); 
-
             Instantiate(prefabToSpawn, offsetPos, Quaternion.identity);
         }
     }

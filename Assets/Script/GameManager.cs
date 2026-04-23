@@ -58,13 +58,21 @@ public class GameManager : MonoBehaviour
     }
 
     // 👇👇👇 สิ่งที่เพิ่มเข้ามาใหม่: เช็คเพลงจบ 👇👇👇
+    private bool hasSongStarted = false;
+
     void Update()
     {
         // ถ้าเกมยังไม่จบ และมีการใส่เพลงไว้
         if (!isGameOver && bgm != null)
         {
-            // ถ้าเพลงหยุดเล่นแล้ว (เล่นจนจบเพลง)
-            if (!bgm.isPlaying)
+            // ดักจับว่าเพลงได้เริ่มเล่นแล้วหรือยัง (กันบั๊กตอนเริ่มเกมใหม่ๆ)
+            if (bgm.isPlaying)
+            {
+                hasSongStarted = true;
+            }
+
+            // ถ้าเพลงเคยเริ่มเล่นไปแล้ว + ตอนนี้เพลงหยุดเล่นแล้ว + ไม่ได้อยู่ในหน้าจอ Pause (Time.timeScale > 0)
+            if (hasSongStarted && !bgm.isPlaying && Time.timeScale > 0f)
             {
                 Victory(); // สั่งให้ชนะทันที!
             }

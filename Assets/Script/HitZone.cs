@@ -27,29 +27,38 @@ public class HitZone : MonoBehaviour
                 GameObject noteToHit = notesInZone[0];
                 float distance = Mathf.Abs(noteToHit.transform.position.x - transform.position.x);
 
-                // --- เปลี่ยนตัวเลขคะแนนตรงนี้ครับ ---
+                // --- เช็คความแม่นยำตามระยะทาง ---
                 if (distance <= 0.5f) 
                 {
-                    // Perfect (ได้ 1000 คะแนน + เพิ่มเลือด 4 ส่วน)
+                    // Perfect (แม่นเป๊ะ)
                     if(GameManager.instance != null) {
                         GameManager.instance.AddScore(1000); 
-                        GameManager.instance.Heal(4); // <-- เพิ่มบรรทัดนี้
+                        GameManager.instance.Heal(4); 
                         GameManager.instance.ShowJudgment("Perfect", transform); 
+                    }
+                }
+                else if (distance <= 1.2f)
+                {
+                    // Great (เกือบเป๊ะ)
+                    if(GameManager.instance != null) {
+                        GameManager.instance.AddScore(500); 
+                        GameManager.instance.Heal(2); 
+                        GameManager.instance.ShowJudgment("Great", transform); 
                     }
                 }
                 else 
                 {
-                    // Great (ได้ 500 คะแนน + เพิ่มเลือด 2 ส่วน)
+                    // Miss (กดตอนโน้ตอยู่ในกรอบจริง แต่กะจังหวะพลาดไปเยอะ = กดเร็วไป/ช้าไป)
                     if(GameManager.instance != null) {
-                        GameManager.instance.AddScore(500); 
-                        GameManager.instance.Heal(2); // <-- เพิ่มบรรทัดนี้
-                        GameManager.instance.ShowJudgment("Great", transform); 
+                        GameManager.instance.ResetCombo(); 
+                        GameManager.instance.TakeDamage(10); 
+                        GameManager.instance.ShowJudgment("Miss", transform); 
                     }
                 }
 
                 notesInZone.Remove(noteToHit);
 
-                // 👇👇👇 เพิ่มบรรทัดนี้เข้าไปสับขาหลอก Unity! 👇👇👇
+                // สับขาหลอก Unity
                 noteToHit.tag = "Untagged"; 
 
                 Destroy(noteToHit);

@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro; 
+using UnityEngine.UI; // สำหรับจัดการ Slider (หลอดเลือด)
+using UnityEngine.SceneManagement; // สำหรับจัดการ Scene (ปุ่มเล่นใหม่)
 
 public class GameManager : MonoBehaviour
 {
@@ -17,9 +19,15 @@ public class GameManager : MonoBehaviour
     public GameObject perfectPrefab;
     public GameObject greatPrefab;
     public GameObject missPrefab;
-    // (ลบตัวแปร judgmentSpawnPoint ตรงกลางจอออกไปแล้ว เพราะเราจะใช้ตำแหน่งของแต่ละเลนแทน)
 
-    // เพิ่มตัวแปรนี้เข้าไป
+    [Header("ระบบเลือดและฉากจบ")]
+    public int maxHP = 100;
+    public int currentHP;
+    public Slider hpSlider;
+    public GameObject gameOverPanel;
+    public GameObject victoryPanel;
+    private bool isGameOver = false; // เอาไว้เช็คว่าเกมจบหรือยัง
+
     private bool isShuttingDown = false;
 
     void Awake()
@@ -29,32 +37,51 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // ตั้งค่าเลือดเริ่มต้น
+        currentHP = maxHP;
+        if (hpSlider != null)
+        {
+            hpSlider.maxValue = maxHP;
+            hpSlider.value = currentHP;
+        }
+
+        // ซ่อนหน้าจอจบเกมตอนเริ่ม
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
+        if (victoryPanel != null) victoryPanel.SetActive(false);
+
+        Time.timeScale = 1f; // ทำให้เวลาเดินปกติ
+
         UpdateUI();
     }
 
     public void AddScore(int baseAmount)
     {
-        // 1. บวกคอมโบเพิ่มไปก่อน 1
+        if (isGameOver) return; // ถ้าตายแล้ว ไม่ต้องบวกคะแนนเพิ่ม
+
         combo++; 
 
-        // 2. ระบบคำนวณตัวคูณ (Multiplier) ตาม GDD ของคุณ
-        int multiplier = 1; // เริ่มต้นที่ x1
+        // ระบบคูณคะแนนสไตล์ Muse Dash: เพิ่มโบนัส 10% ทุกๆ 10 คอมโบ (สูงสุด 50%)
+        float multiplier = 1.0f; // เริ่มต้นที่ 100% ของคะแนนปกติ
 
-        // ตัวอย่างการตั้งค่าตัวคูณ: (แก้ตัวเลขตรงนี้ให้ตรงกับ GDD ได้เลย)
         if (combo >= 50) {
-            multiplier = 4; // คอมโบ 50 ขึ้นไป เอาคะแนน x4
+            multiplier = 1.5f; // คอมโบ 50 ขึ้นไป ได้คะแนน 150%
+        }
+        else if (combo >= 40) {
+            multiplier = 1.4f; // คอมโบ 40-49 ได้คะแนน 140%
         }
         else if (combo >= 30) {
-            multiplier = 3; // คอมโบ 30-49 เอาคะแนน x3
+            multiplier = 1.3f; // คอมโบ 30-39 ได้คะแนน 130%
+        }
+        else if (combo >= 20) {
+            multiplier = 1.2f; // คอมโบ 20-29 ได้คะแนน 120%
         }
         else if (combo >= 10) {
-            multiplier = 2; // คอมโบ 10-29 เอาคะแนน x2
+            multiplier = 1.1f; // คอมโบ 10-19 ได้คะแนน 110%
         }
 
-        // 3. เอาคะแนนพื้นฐาน (100 หรือ 50) ไปคูณกับ multiplier
-        int finalScore = baseAmount * multiplier;
+        // เอาคะแนนมาคูณ แล้วปัดเศษให้เป็นเลขจำนวนเต็มล้วนๆ
+        int finalScore = Mathf.RoundToInt(baseAmount * multiplier);
         
-        // 4. เอาคะแนนที่คูณแล้วไปบวกเข้าคะแนนรวม
         score += finalScore;
 
         UpdateUI();
@@ -62,6 +89,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetCombo()
     {
+        if (isGameOver) return; // ถ้าตายแล้ว ไม่ต้องอัปเดตคอมโบ
         combo = 0;
         UpdateUI();
     }
@@ -71,35 +99,81 @@ public class GameManager : MonoBehaviour
         // 1. จัดการตัวเลขคะแนน (Score)
         if (scoreText != null) 
         {
-            // ใช้ "D6" เพื่อให้มีเลข 0 นำหน้าให้ครบ 6 หลัก (เช่น 000150) 
-            // จะทำให้ดูเป็นเกมแนวมิวสิค/อาเขตมากขึ้นครับ
             scoreText.text = score.ToString("D6"); 
-            
-            // ปล. ถ้าอยากได้แค่เลขเพียวๆ ไม่มี 0 นำหน้า ให้เปลี่ยนเป็น: 
-            // scoreText.text = score.ToString(); 
         }
 
         // 2. จัดการตัวเลขคอมโบ (Combo)
         if (comboText != null) 
         {
-            // ทริคเกม Rhythm: ถ้าคอมโบยังเป็น 0 จะซ่อนตัวเลขไว้ก่อน 
-            // พอตีโดนตัวแรก (คอมโบ > 0) ค่อยโชว์ตัวเลข
             if (combo > 0) 
             {
-                comboText.gameObject.SetActive(true); // เปิดโชว์ตัวหนังสือ
+                comboText.gameObject.SetActive(true); 
                 comboText.text = combo.ToString();
             }
             else 
             {
-                comboText.gameObject.SetActive(false); // ซ่อนตัวหนังสือตอนหลุดคอมโบ
+                comboText.gameObject.SetActive(false); 
             }
         }
+    }
+
+    // --- ฟังก์ชันลดเลือดเวลาตีพลาด ---
+    public void TakeDamage(int damageAmount)
+    {
+        if (isGameOver || isShuttingDown) return; 
+
+        currentHP -= damageAmount;
+        if (hpSlider != null) hpSlider.value = currentHP;
+
+        if (currentHP <= 0)
+        {
+            currentHP = 0;
+            GameOver();
+        }
+    }
+
+    // --- ฟังก์ชันเพิ่มเลือดเมื่อตีโดน ---
+    public void Heal(int healAmount)
+    {
+        if (isGameOver || isShuttingDown) return;
+
+        currentHP += healAmount;
+
+        // ป้องกันไม่ให้เลือดเกินค่าสูงสุดที่ตั้งไว้ (Max HP)
+        if (currentHP > maxHP) currentHP = maxHP;
+
+        // อัปเดตหลอดเลือดบนจอ
+        if (hpSlider != null) hpSlider.value = currentHP;
+    }
+
+    // --- ฟังก์ชันแพ้ ---
+    public void GameOver()
+    {
+        isGameOver = true;
+        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        Time.timeScale = 0f; // หยุดเวลาในเกม
+    }
+
+    // --- ฟังก์ชันชนะ ---
+    public void Victory()
+    {
+        if (isGameOver) return; 
+        isGameOver = true;
+        if (victoryPanel != null) victoryPanel.SetActive(true);
+        Time.timeScale = 0f; // หยุดเวลาในเกม
+    }
+
+    // --- ฟังก์ชันสำหรับผูกกับปุ่ม เล่นใหม่ ---
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        Time.timeScale = 1f; 
     }
 
     // เพิ่มฟังก์ชันเช็คสถานะการปิดเกม
     void OnApplicationQuit()
     {
-        isShuttingDown = true; // บอกให้รู้ว่าเกมกำลังจะปิดแล้วนะ
+        isShuttingDown = true; 
     }
 
     // ฟังก์ชันรับค่า 2 อย่าง: type (รูปอะไร) และ spawnLocation (ตำแหน่งเลนไหน)
@@ -116,9 +190,7 @@ public class GameManager : MonoBehaviour
 
         if (prefabToSpawn != null && spawnLocation != null)
         {
-            // --- เปลี่ยนตรงนี้ ---
             // แกน X ใส่ -1.5f เพื่อให้ขยับซ้าย, แกน Y ใส่ 1.5f เพื่อให้ลอยขึ้น
-            // (สามารถปรับตัวเลข -1.5f ให้มากหรือน้อยลงได้ตามชอบเลยครับ)
             Vector3 offsetPos = spawnLocation.position + new Vector3(-1.5f, 1.5f, 0); 
 
             Instantiate(prefabToSpawn, offsetPos, Quaternion.identity);

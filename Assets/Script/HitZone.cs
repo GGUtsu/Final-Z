@@ -30,22 +30,28 @@ public class HitZone : MonoBehaviour
                 // --- เปลี่ยนตัวเลขคะแนนตรงนี้ครับ ---
                 if (distance <= 0.5f) 
                 {
-                    // ระยะแม่นยำ = Perfect (ได้ฐาน 1000 คะแนน)
+                    // Perfect (ได้ 1000 คะแนน + เพิ่มเลือด 4 ส่วน)
                     if(GameManager.instance != null) {
                         GameManager.instance.AddScore(1000); 
+                        GameManager.instance.Heal(4); // <-- เพิ่มบรรทัดนี้
                         GameManager.instance.ShowJudgment("Perfect", transform); 
                     }
                 }
                 else 
                 {
-                    // ระยะ Great (ได้ฐาน 500 คะแนน หรือจะปรับตาม GDD ก็ได้ครับ)
+                    // Great (ได้ 500 คะแนน + เพิ่มเลือด 2 ส่วน)
                     if(GameManager.instance != null) {
                         GameManager.instance.AddScore(500); 
+                        GameManager.instance.Heal(2); // <-- เพิ่มบรรทัดนี้
                         GameManager.instance.ShowJudgment("Great", transform); 
                     }
                 }
 
                 notesInZone.Remove(noteToHit);
+
+                // 👇👇👇 เพิ่มบรรทัดนี้เข้าไปสับขาหลอก Unity! 👇👇👇
+                noteToHit.tag = "Untagged"; 
+
                 Destroy(noteToHit);
             }
         }
@@ -63,18 +69,24 @@ public class HitZone : MonoBehaviour
         if (other.CompareTag("Note")) notesInZone.Add(other.gameObject);
     }
 
-    // ปล่อยโน้ตหลุดกรอบไป (ลบออก + ตัดคอมโบ + เด้ง Miss)
-    private void OnTriggerExit2D(Collider2D other)
+    // ปล่อยโน้ตหลุดกรอบไป (ลบออก + ตัดคอมโบ + เด้ง Miss + ลดเลือด 10)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (other.CompareTag("Note") && notesInZone.Contains(other.gameObject))
+        // ถ้าสิ่งที่หลุดกรอบออกไปคือ "โน้ต"
+        if (collision.CompareTag("Note"))
         {
+            notesInZone.Remove(collision.gameObject);
+
             if (GameManager.instance != null)
             {
-                GameManager.instance.ResetCombo();
-                GameManager.instance.ShowJudgment("Miss", transform); // เพิ่ม transform เข้าไป
+                GameManager.instance.ResetCombo(); // ตัดคอมโบ
+                GameManager.instance.ShowJudgment("Miss", transform); // โชว์รูป Miss
+
+                // --- เพิ่มคำสั่งลดเลือด 10 หน่วย ตรงนี้ครับ! ---
+                GameManager.instance.TakeDamage(10); 
             }
-            notesInZone.Remove(other.gameObject);
-            Destroy(other.gameObject);
+
+            Destroy(collision.gameObject); // ทำลายโน้ตทิ้ง
         }
     }
 }

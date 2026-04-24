@@ -18,31 +18,23 @@ public class SongSelectionMenu : MonoBehaviour
     [Header("Songs Database")]
     public SongData[] songs;
 
-    [Header("UI References (Left Panel)")]
-    public Image coverImageDisplay; // The big image on the left
-    public TMP_Text titleTextDisplay; // The text showing the current song name
+    [Header("UI References (Optional Left Panel)")]
+    public Image coverImageDisplay; 
+    public TMP_Text titleTextDisplay; 
 
-    private int currentSelectedIndex = 0;
+    [Header("Back Button Settings")]
+    [Tooltip("Name of the Main Menu scene to go back to")]
+    public string mainMenuSceneName = "MainMenu";
 
-    void Start()
-    {
-        // Select the first song by default on start
-        if (songs != null && songs.Length > 0)
-        {
-            SelectSong(0);
-        }
-    }
-
-    // Link this to the OnClick event of your Song Buttons
-    // Parameter 'index': 0 for the first button, 1 for the second, etc.
-    public void SelectSong(int index)
+    // ฟังก์ชันนี้สำหรับปุ่มเลือกเพลง (กดแล้วโหลดเข้าเกมเลย)
+    // Parameter 'index': 0 สำหรับเพลงที่ 1, 1 สำหรับเพลงที่ 2, 2 สำหรับเพลงที่ 3
+    public void SelectAndPlaySong(int index)
     {
         if (index < 0 || index >= songs.Length) return;
 
-        currentSelectedIndex = index;
         SongData selectedSong = songs[index];
 
-        // Update the UI on the left panel
+        // เผื่อว่าคุณยังมีรูปปกโชว์อยู่ (ถ้าลบไปแล้วก็ไม่เป็นไร โค้ดจะไม่พัง)
         if (coverImageDisplay != null && selectedSong.coverArt != null) 
         {
             coverImageDisplay.sprite = selectedSong.coverArt;
@@ -52,26 +44,31 @@ public class SongSelectionMenu : MonoBehaviour
         {
             titleTextDisplay.text = selectedSong.songTitle;
         }
-    }
 
-    // Link this to a "Play" or "Start Game" button
-    public void PlaySelectedSong()
-    {
-        if (songs == null || songs.Length == 0) return;
-
-        SongData selectedSong = songs[currentSelectedIndex];
-
-        // Save the selected song title to PlayerPrefs so the Gameplay scene knows what was chosen
+        // เซฟชื่อเพลงไว้ เผื่อในฉากเกมเพลย์ต้องการใช้
         PlayerPrefs.SetString("SelectedSong", selectedSong.songTitle);
 
-        // Load the scene
+        // โหลดเข้าฉากเกมทันที!
         if (!string.IsNullOrEmpty(selectedSong.sceneToLoad))
         {
             SceneManager.LoadScene(selectedSong.sceneToLoad);
         }
         else
         {
-            Debug.LogError("SongSelectionMenu: 'Scene To Load' is empty for " + selectedSong.songTitle);
+            Debug.LogError("SongSelectionMenu: ยังไม่ได้ใส่ชื่อ Scene To Load สำหรับเพลง " + selectedSong.songTitle);
+        }
+    }
+
+    // ฟังก์ชันนี้สำหรับปุ่ม BACK
+    public void GoBack()
+    {
+        if (!string.IsNullOrEmpty(mainMenuSceneName))
+        {
+            SceneManager.LoadScene(mainMenuSceneName);
+        }
+        else
+        {
+            Debug.LogWarning("SongSelectionMenu: ยังไม่ได้ตั้งค่าชื่อ Scene ของ Main Menu");
         }
     }
 }

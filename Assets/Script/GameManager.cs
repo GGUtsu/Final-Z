@@ -28,10 +28,19 @@ public class GameManager : MonoBehaviour
     public GameObject victoryPanel;
     private bool isGameOver = false; // เอาไว้เช็คว่าเกมจบหรือยัง
 
+    [Header("UI สรุปผลตอนจบเกม")]
+    public TextMeshProUGUI gameOverScoreText;
+    public TextMeshProUGUI gameOverHighScoreText;
+    public TextMeshProUGUI victoryScoreText;
+    public TextMeshProUGUI victoryHighScoreText;
+
     // 👇👇👇 สิ่งที่เพิ่มเข้ามาใหม่: ระบบเพลง 👇👇👇
     [Header("ระบบเพลง")]
     public AudioSource bgm;
     // 👆👆👆 ============================== 👆👆👆
+
+    [Header("หน้าต่างตั้งค่า (Settings UI)")]
+    public GameObject soundSettingPanel;
 
     private bool isShuttingDown = false;
 
@@ -59,9 +68,12 @@ public class GameManager : MonoBehaviour
 
     // 👇👇👇 สิ่งที่เพิ่มเข้ามาใหม่: เช็คเพลงจบ 👇👇👇
     private bool hasSongStarted = false;
+    public bool isChangingScene = false; // ป้องกันบั๊ก Victory เด้งตอนเปลี่ยนฉาก
 
     void Update()
     {
+        if (isChangingScene) return;
+
         // ถ้าเกมยังไม่จบ และมีการใส่เพลงไว้
         if (!isGameOver && bgm != null)
         {
@@ -74,7 +86,12 @@ public class GameManager : MonoBehaviour
             // ถ้าเพลงเคยเริ่มเล่นไปแล้ว + ตอนนี้เพลงหยุดเล่นแล้ว + ไม่ได้อยู่ในหน้าจอ Pause (Time.timeScale > 0)
             if (hasSongStarted && !bgm.isPlaying && Time.timeScale > 0f)
             {
-                Victory(); // สั่งให้ชนะทันที!
+                // เช็คว่าเพลงหยุดเพราะเล่นจบจริงๆ ใช่ไหม (เวลาเพลงจบ ค่า time จะถูกรีเซ็ตเป็น 0 หรือไปถึงจุดจบ)
+                // ป้องกันปัญหาตอนพับจอ (Tab out) แล้วเกมคิดว่าเพลงจบ
+                if (bgm.time == 0f || (bgm.clip != null && bgm.time >= bgm.clip.length - 0.1f))
+                {
+                    Victory(); // สั่งให้ชนะทันที!
+                }
             }
         }
     }
@@ -109,7 +126,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateUI()
     {
-        if (scoreText != null) scoreText.text = score.ToString("D6"); 
+        if (scoreText != null) scoreText.text = score.ToString(); 
 
         if (comboText != null) 
         {
@@ -154,6 +171,11 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
         Time.timeScale = 0f; 
+
+        // หยุดเพลงตอนตาย
+        if (bgm != null) bgm.Stop();
+
+        SaveAndDisplayHighScore(gameOverScoreText, gameOverHighScoreText);
     }
 
     public void Victory()
@@ -162,12 +184,59 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         if (victoryPanel != null) victoryPanel.SetActive(true);
         Time.timeScale = 0f; 
+
+        // เผื่อไว้ให้หยุดเพลงเหมือนกัน (กรณีเวลาจบพอดีแล้วเสียงมันค้าง)
+        if (bgm != null) bgm.Stop();
+
+        SaveAndDisplayHighScore(victoryScoreText, victoryHighScoreText);
+    }
+
+    private void SaveAndDisplayHighScore(TextMeshProUGUI finalScoreText, TextMeshProUGUI highScoreText)
+    {
+        // ใช้ชื่อ Scene ปัจจุบันเป็น Key สำหรับเซฟ High Score ของด่านนี้
+        string sceneName = SceneManager.GetActiveScene().name;
+        string highScoreKey = "HighScore_" + sceneName;
+
+        // ดึงค่า High Score เดิมออกมา (ถ้าไม่มีจะเป็น 0)
+        int highScore = PlayerPrefs.GetInt(highScoreKey, 0);
+
+        // ถ้าคะแนนรอบนี้มากกว่า High Score เดิม ให้เซฟใหม่
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt(highScoreKey, highScore);
+            PlayerPrefs.Save();
+        }
+
+        // แสดงผลขึ้นจอ
+        if (finalScoreText != null) finalScoreText.text = score.ToString();
+        if (highScoreText != null) highScoreText.text = highScore.ToString();
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+        isChangingScene = true;
         Time.timeScale = 1f; 
+        AudioListener.pause = false; // ป้องกันเสียงค้าง
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
+    }
+
+    // ฟังก์ชันสำหรับปุ่ม Menu ในหน้า Game Over / Victory เพื่อกลับไปหน้า Setting A
+    public void LoadSettingA()
+    {
+        isChangingScene = true;
+        Time.timeScale = 1f; 
+        AudioListener.pause = false; // ป้องกันเสียงค้าง/หายเวลาเปลี่ยนซีน
+        SceneManager.LoadScene("Setting A"); 
+    }
+
+    // ฟังก์ชันเสริม เผื่อต้องการกำหนดชื่อ Scene เองในปุ่ม (ให้เลือกใช้แบบ Dynamic string)
+    public void LoadSceneByName(string sceneName)
+    {
+        isChangingScene = true;
+        Time.timeScale = 1f; 
+        AudioListener.pause = false;
+        SceneManager.LoadScene(sceneName); 
     }
 
     void OnApplicationQuit()
@@ -190,5 +259,17 @@ public class GameManager : MonoBehaviour
             Vector3 offsetPos = spawnLocation.position + new Vector3(-1.5f, 1.5f, 0); 
             Instantiate(prefabToSpawn, offsetPos, Quaternion.identity);
         }
+    }
+
+    // ฟังก์ชันสำหรับเปิดหน้าต่างตั้งค่าเสียง
+    public void OpenSoundSettingPanel()
+    {
+        if (soundSettingPanel != null) soundSettingPanel.SetActive(true);
+    }
+
+    // ฟังก์ชันสำหรับปิดหน้าต่างตั้งค่าเสียง
+    public void CloseSoundSettingPanel()
+    {
+        if (soundSettingPanel != null) soundSettingPanel.SetActive(false);
     }
 }

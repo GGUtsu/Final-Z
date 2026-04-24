@@ -65,6 +65,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f; // ต้องคืนค่าเวลาก่อนรีสตาร์ท ไม่งั้นฉากใหม่จะค้าง
         AudioListener.pause = false; // อย่าลืมปลด Pause เสียงก่อนเริ่มใหม่
+        if (GameManager.instance != null) GameManager.instance.isChangingScene = true; // ป้องกันบั๊กเด้งหน้า Win
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); 
     }
 
@@ -72,6 +73,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f; 
         AudioListener.pause = false;
-        SceneManager.LoadScene("MainMenu"); 
+        if (GameManager.instance != null) GameManager.instance.isChangingScene = true; // ป้องกันบั๊กเด้งหน้า Win
+        SceneManager.LoadScene("Setting A"); // เปลี่ยนให้ตรงกับชื่อฉากเมนูของคุณ
     }
 }

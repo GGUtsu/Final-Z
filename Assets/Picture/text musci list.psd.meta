@@ -1,0 +1,573 @@
+fileFormatVersion: 2
+guid: 05f4929548b68fd45b22a914099ed280
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5273428666936058872
+    second: text musci list_0
+  - first:
+      213: -467753876095626667
+    second: text musci list_1
+  - first:
+      213: -9142980121765298451
+    second: text musci list_2
+  - first:
+      213: -8583367228945231447
+    second: text musci list_3
+  - first:
+      213: 1115691024780301565
+    second: text musci list_4
+  - first:
+      213: 1160544085110190981
+    second: text musci list_5
+  - first:
+      213: 7764957872778041743
+    second: text musci list_6
+  - first:
+      213: 7467404751715637227
+    second: text musci list_7
+  - first:
+      213: -3279592821649358609
+    second: text musci list_8
+  - first:
+      213: -8120065860533790051
+    second: text musci list_9
+  - first:
+      213: 7316647170619627783
+    second: text musci list_10
+  - first:
+      213: -2062853255663311379
+    second: text musci list_11
+  - first:
+      213: 3813215735729970355
+    second: text musci list_12
+  - first:
+      213: 5568328216855137694
+    second: text musci list_13
+  - first:
+      213: -5778962619825019446
+    second: text musci list_14
+  - first:
+      213: 2985624237935200380
+    second: text musci list_15
+  - first:
+      213: -7770070754171504784
+    second: text musci list_16
+  - first:
+      213: -2725811547886818068
+    second: text musci list_17
+  - first:
+      213: -5703814901076641416
+    second: text musci list_18
+  - first:
+      213: 7654969806014719327
+    second: text musci list_19
+  - first:
+      213: 6547131812209776971
+    second: text musci list_20
+  - first:
+      213: 9149357675156569722
+    second: text musci list_21
+  - first:
+      213: -9179666765403830451
+    second: text musci list_22
+  - first:
+      213: 1367309765382623973
+    second: text musci list_23
+  - first:
+      213: 3675043887083827734
+    second: text musci list_24
+  - first:
+      213: 8615326585107471880
+    second: text musci list_25
+  - first:
+      213: 7787167940626937390
+    second: text musci list_26
+  - first:
+      213: -3645084684835379633
+    second: text musci list_27
+  - first:
+      213: 8144617962137205739
+    second: text musci list_28
+  - first:
+      213: -6068316449313262542
+    second: text musci list_29
+  - first:
+      213: 8517859754962925607
+    second: text musci list_30
+  - first:
+      213: 3669703168412240307
+    second: text musci list_31
+  - first:
+      213: 1508207157226147263
+    second: text musci list_32
+  - first:
+      213: -8234054621730370815
+    second: text musci list_33
+  - first:
+      213: 126132252691031193
+    second: text musci list_34
+  - first:
+      213: -3710632843608804529
+    second: text musci list_35
+  - first:
+      213: 5258283725789178401
+    second: text musci list_36
+  - first:
+      213: -1983404074244606219
+    second: text musci list_37
+  - first:
+      213: -3123372772980708655
+    second: text musci list_38
+  - first:
+      213: -3122181171837024213
+    second: text musci list_39
+  - first:
+      213: -9096595032657101200
+    second: text musci list_40
+  - first:
+      213: 6585545157552535289
+    second: text musci list_41
+  - first:
+      213: -3556685645531068717
+    second: text musci list_42
+  - first:
+      213: -3709026171118522679
+    second: text musci list_43
+  - first:
+      213: -5748238690256014616
+    second: text musci list_44
+  - first:
+      213: 5128604578673646987
+    second: text musci list_45
+  - first:
+      213: -7828333513352725780
+    second: text musci list_46
+  - first:
+      213: 6419680408349168640
+    second: text musci list_47
+  - first:
+      213: 351025851552271969
+    second: text musci list_48
+  - first:
+      213: 1876280165585417773
+    second: text musci list_49
+  - first:
+      213: 8182691559888443186
+    second: text musci list_50
+  - first:
+      213: 4687298349246492111
+    second: text musci list_51
+  - first:
+      213: -652261379379813947
+    second: text musci list_52
+  - first:
+      213: 6859253589946812912
+    second: text musci list_53
+  - first:
+      213: 8499504575063798602
+    second: text musci list_54
+  - first:
+      213: 1189341677812375141
+    second: text musci list_55
+  - first:
+      213: 1336704359554262937
+    second: text musci list_56
+  - first:
+      213: -1796782391549390548
+    second: text musci list_57
+  - first:
+      213: 1526683134535018007
+    second: text musci list_58
+  - first:
+      213: -7086356149860196398
+    second: text musci list_59
+  - first:
+      213: 5225702275345909166
+    second: text musci list_60
+  - first:
+      213: 1349248548923883236
+    second: text musci list_61
+  - first:
+      213: 5581597694619406390
+    second: text musci list_62
+  - first:
+      213: -4188334644746325174
+    second: text musci list_63
+  - first:
+      213: -8030358987740789882
+    second: text musci list_64
+  - first:
+      213: -4927757280084642695
+    second: text musci list_65
+  - first:
+      213: -4320978669928058698
+    second: text musci list_66
+  - first:
+      213: 6224681366128147401
+    second: text musci list_67
+  - first:
+      213: 1160195365888346200
+    second: text musci list_68
+  - first:
+      213: 5769460405567371837
+    second: text musci list_69
+  - first:
+      213: 9184192806539558972
+    second: text musci list_70
+  - first:
+      213: 8226641046021485161
+    second: text musci list_71
+  - first:
+      213: -3387233926148953303
+    second: text musci list_72
+  - first:
+      213: 2095135149392083063
+    second: text musci list_73
+  - first:
+      213: -2434840187014734712
+    second: text musci list_74
+  - first:
+      213: -7470139452849131673
+    second: text musci list_75
+  - first:
+      213: -5245739663499609260
+    second: text musci list_76
+  - first:
+      213: 957583364716981137
+    second: text musci list_77
+  - first:
+      213: -684028712130375027
+    second: text musci list_78
+  - first:
+      213: 4080547024678430812
+    second: text musci list_79
+  - first:
+      213: 1387737659868115280
+    second: text musci list_80
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: text musci list_0
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 747
+        width: 1743
+        height: 280
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80c1ae6319401d6b0800000000000000
+      internalID: -5273428666936058872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: text musci list_1
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 382
+        width: 1649
+        height: 317
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5521205f3543289f0800000000000000
+      internalID: -467753876095626667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: text musci list_2
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 30
+        width: 1502
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: deeb8b5550c9d1180800000000000000
+      internalID: -9142980121765298451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: text musci list_3
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 940
+        width: 37
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a19dfd5bf0c1e880800000000000000
+      internalID: -8583367228945231447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: text musci list_37
+      rect:
+        serializedVersion: 2
+        x: 974
+        y: 592
+        width: 39
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f67694c0888974e0800000000000000
+      internalID: -1983404074244606219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: text musci list_64
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 267
+        width: 37
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68348dc1c0f6e8090800000000000000
+      internalID: -8030358987740789882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      text musci list_0: -5273428666936058872
+      text musci list_1: -467753876095626667
+      text musci list_10: 7316647170619627783
+      text musci list_11: -2062853255663311379
+      text musci list_12: 3813215735729970355
+      text musci list_13: 5568328216855137694
+      text musci list_14: -5778962619825019446
+      text musci list_15: 2985624237935200380
+      text musci list_16: -7770070754171504784
+      text musci list_17: -2725811547886818068
+      text musci list_18: -5703814901076641416
+      text musci list_19: 7654969806014719327
+      text musci list_2: -9142980121765298451
+      text musci list_20: 6547131812209776971
+      text musci list_21: 9149357675156569722
+      text musci list_22: -9179666765403830451
+      text musci list_23: 1367309765382623973
+      text musci list_24: 3675043887083827734
+      text musci list_25: 8615326585107471880
+      text musci list_26: 7787167940626937390
+      text musci list_27: -3645084684835379633
+      text musci list_28: 8144617962137205739
+      text musci list_29: -6068316449313262542
+      text musci list_3: -8583367228945231447
+      text musci list_30: 8517859754962925607
+      text musci list_31: 3669703168412240307
+      text musci list_32: 1508207157226147263
+      text musci list_33: -8234054621730370815
+      text musci list_34: 126132252691031193
+      text musci list_35: -3710632843608804529
+      text musci list_36: 5258283725789178401
+      text musci list_37: -1983404074244606219
+      text musci list_38: -3123372772980708655
+      text musci list_39: -3122181171837024213
+      text musci list_4: 1115691024780301565
+      text musci list_40: -9096595032657101200
+      text musci list_41: 6585545157552535289
+      text musci list_42: -3556685645531068717
+      text musci list_43: -3709026171118522679
+      text musci list_44: -5748238690256014616
+      text musci list_45: 5128604578673646987
+      text musci list_46: -7828333513352725780
+      text musci list_47: 6419680408349168640
+      text musci list_48: 351025851552271969
+      text musci list_49: 1876280165585417773
+      text musci list_5: 1160544085110190981
+      text musci list_50: 8182691559888443186
+      text musci list_51: 4687298349246492111
+      text musci list_52: -652261379379813947
+      text musci list_53: 6859253589946812912
+      text musci list_54: 8499504575063798602
+      text musci list_55: 1189341677812375141
+      text musci list_56: 1336704359554262937
+      text musci list_57: -1796782391549390548
+      text musci list_58: 1526683134535018007
+      text musci list_59: -7086356149860196398
+      text musci list_6: 7764957872778041743
+      text musci list_60: 5225702275345909166
+      text musci list_61: 1349248548923883236
+      text musci list_62: 5581597694619406390
+      text musci list_63: -4188334644746325174
+      text musci list_64: -8030358987740789882
+      text musci list_65: -4927757280084642695
+      text musci list_66: -4320978669928058698
+      text musci list_67: 6224681366128147401
+      text musci list_68: 1160195365888346200
+      text musci list_69: 5769460405567371837
+      text musci list_7: 7467404751715637227
+      text musci list_70: 9184192806539558972
+      text musci list_71: 8226641046021485161
+      text musci list_72: -3387233926148953303
+      text musci list_73: 2095135149392083063
+      text musci list_74: -2434840187014734712
+      text musci list_75: -7470139452849131673
+      text musci list_76: -5245739663499609260
+      text musci list_77: 957583364716981137
+      text musci list_78: -684028712130375027
+      text musci list_79: 4080547024678430812
+      text musci list_8: -3279592821649358609
+      text musci list_80: 1387737659868115280
+      text musci list_9: -8120065860533790051
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -4,19 +4,19 @@ using UnityEngine;
 public class BackgroundScroller : MonoBehaviour
 {
     [Header("Background Settings")]
-    // The Prefab to spawn (Make sure to make your background a prefab)
     public GameObject backgroundPrefab; 
     
     public float scrollSpeed = 5f;
-    public float backgroundWidth = 20f;
     
-    // The X position where the background will be destroyed (left side of camera)
+    [Tooltip("ใส่ 0 ไว้ให้ระบบคำนวณขนาดภาพอัตโนมัติ (ช่วยแก้ปัญหาภาพไม่ต่อกัน)")]
+    public float backgroundWidth = 0f;
+    
+    [Tooltip("ตำแหน่งแกน X ซ้ายสุดที่ฉากจะถูกย้ายไปต่อท้าย")]
     public float destroyX = -25f;
     
-    // The X position threshold to spawn the next background (right side of camera)
-    public float spawnXThreshold = 20f;
-
-    private List<GameObject> activeBackgrounds = new List<GameObject>();
+    // จำนวนฉากที่จะสร้างเวียน (ใช้แค่ 3 รูปวนลูปไปเรื่อยๆ)
+    private int poolSize = 3; 
+    private List<GameObject> backgrounds = new List<GameObject>();
 
     void Start()
     {
@@ -26,45 +26,54 @@ public class BackgroundScroller : MonoBehaviour
             return;
         }
 
-        // Spawn initial backgrounds (one at center, one to the right)
-        SpawnBackground(transform.position.x);
-        SpawnBackground(transform.position.x + backgroundWidth);
+        // คำนวณความกว้างอัตโนมัติจาก SpriteRenderer (ถ้าผู้ใช้ตั้งเป็น 0)
+        if (backgroundWidth <= 0f)
+        {
+            SpriteRenderer sr = backgroundPrefab.GetComponentInChildren<SpriteRenderer>();
+            if (sr != null)
+            {
+                backgroundWidth = sr.bounds.size.x;
+            }
+            else
+            {
+                backgroundWidth = 20f; // ค่าเผื่อฉุกเฉิน
+            }
+        }
+
+        // สร้างฉากเตรียมไว้และจัดเรียงให้ติดกันเป๊ะๆ
+        for (int i = 0; i < poolSize; i++)
+        {
+            Vector3 spawnPos = new Vector3(transform.position.x + (i * backgroundWidth), transform.position.y, transform.position.z);
+            GameObject bg = Instantiate(backgroundPrefab, spawnPos, Quaternion.identity, transform);
+            backgrounds.Add(bg);
+        }
     }
 
     void Update()
     {
-        if (activeBackgrounds.Count == 0) return;
+        if (backgrounds.Count == 0) return;
 
-        // Move all active backgrounds to the left
-        for (int i = 0; i < activeBackgrounds.Count; i++)
+        // เลื่อนฉากทั้งหมดไปทางซ้าย
+        for (int i = 0; i < backgrounds.Count; i++)
         {
-            if (activeBackgrounds[i] != null)
-            {
-                activeBackgrounds[i].transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
-            }
+            backgrounds[i].transform.position += Vector3.left * scrollSpeed * Time.deltaTime;
         }
 
-        // Check if we need to spawn a new background to the right
-        GameObject rightMostBg = activeBackgrounds[activeBackgrounds.Count - 1];
-        if (rightMostBg != null && rightMostBg.transform.position.x < spawnXThreshold)
+        // เช็คตัวหน้าสุด (ซ้ายสุด) ว่าหลุดขอบจอตามระยะ destroyX หรือยัง
+        GameObject leftMostBg = backgrounds[0];
+        if (leftMostBg.transform.position.x < destroyX)
         {
-            SpawnBackground(rightMostBg.transform.position.x + backgroundWidth);
-        }
+            // หาตัวหลังสุด (ขวาสุด)
+            GameObject rightMostBg = backgrounds[backgrounds.Count - 1];
 
-        // Check if we need to destroy the leftmost background that went out of screen
-        GameObject leftMostBg = activeBackgrounds[0];
-        if (leftMostBg != null && leftMostBg.transform.position.x < destroyX)
-        {
-            activeBackgrounds.RemoveAt(0);
-            Destroy(leftMostBg);
-        }
-    }
+            // จับตัวซ้ายสุด ย้ายไปต่อท้ายตัวขวาสุด (ห่างกันเท่ากับ backgroundWidth เป๊ะๆ ทำให้รอยต่อเนียน)
+            Vector3 newPos = leftMostBg.transform.position;
+            newPos.x = rightMostBg.transform.position.x + backgroundWidth;
+            leftMostBg.transform.position = newPos;
 
-    void SpawnBackground(float xPos)
-    {
-        Vector3 spawnPos = new Vector3(xPos, transform.position.y, transform.position.z);
-        // Instantiate and set this object as the parent
-        GameObject newBg = Instantiate(backgroundPrefab, spawnPos, Quaternion.identity, transform);
-        activeBackgrounds.Add(newBg);
+            // สลับตำแหน่งตัวแปรในลิสต์ ให้ตัวที่เพิ่งย้ายไปอยู่หลังสุด
+            backgrounds.RemoveAt(0);
+            backgrounds.Add(leftMostBg);
+        }
     }
 }

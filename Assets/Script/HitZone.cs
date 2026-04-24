@@ -12,7 +12,26 @@ public class HitZone : MonoBehaviour
     public Color defaultColor = Color.white; // สีปกติตอนไม่ได้กด
     public Color pressedColor = Color.gray;  // สีที่จะเปลี่ยนตอนนิ้วกดลงไป
 
+    [Header("ตั้งค่าเสียง (Sound Effects)")]
+    public AudioClip keyPressSound; // เสียงตอนกดปุ่มเปล่าๆ
+    public AudioClip hitSound;      // เสียงตอนตีโดนโน้ต (Perfect/Great)
+    public AudioClip missSound;     // เสียงตอนพลาด (กดวืด หรือปล่อยโน้ตหลุดกรอบ)
+
+    private AudioSource sfxSource; // สำหรับเสียงโดนโน้ตและพลาด (ยอมให้ทับกันได้)
+    private AudioSource tapSource; // สำหรับเสียงเคาะเปล่าๆ (ตัดเสียงเก่าทิ้งกันหนวกหู)
     private List<GameObject> notesInZone = new List<GameObject>();
+
+    // ตัวแปร static ป้องกันเสียงซ้อนกันเวลากดพร้อมกัน
+    private static int lastHitFrame = -1;
+    private static int lastMissFrame = -1;
+    private static int lastTapFrame = -1;
+
+    void Start()
+    {
+        // สร้าง AudioSource แยก 2 ตัว เพื่อไม่ให้เสียงตีโน้ตโดนตัดตอนกดรัวๆ
+        sfxSource = gameObject.AddComponent<AudioSource>();
+        tapSource = gameObject.AddComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -36,6 +55,7 @@ public class HitZone : MonoBehaviour
                         GameManager.instance.Heal(4); 
                         GameManager.instance.ShowJudgment("Perfect", transform); 
                     }
+                    PlaySFX(hitSound);
                 }
                 else if (distance <= 1.2f)
                 {
@@ -45,6 +65,7 @@ public class HitZone : MonoBehaviour
                         GameManager.instance.Heal(2); 
                         GameManager.instance.ShowJudgment("Great", transform); 
                     }
+                    PlaySFX(hitSound);
                 }
                 else 
                 {
@@ -54,6 +75,7 @@ public class HitZone : MonoBehaviour
                         GameManager.instance.TakeDamage(10); 
                         GameManager.instance.ShowJudgment("Miss", transform); 
                     }
+                    PlaySFX(missSound);
                 }
 
                 notesInZone.Remove(noteToHit);
@@ -62,6 +84,11 @@ public class HitZone : MonoBehaviour
                 noteToHit.tag = "Untagged"; 
 
                 Destroy(noteToHit);
+            }
+            else
+            {
+                // กดแต่ไม่มีโน้ตในกรอบ (กดเปล่าๆ)
+                PlayTapSFX();
             }
         }
 
@@ -95,7 +122,42 @@ public class HitZone : MonoBehaviour
                 GameManager.instance.TakeDamage(10); 
             }
 
+            PlaySFX(missSound); // เล่นเสียงพลาดเมื่อโน้ตหลุดขอบจอ
+
             Destroy(collision.gameObject); // ทำลายโน้ตทิ้ง
+        }
+    }
+
+    // ฟังก์ชันสำหรับเล่นเสียงทับกันได้ (ใช้กับ Hit และ Miss)
+    private void PlaySFX(AudioClip clip)
+    {
+        if (clip != null && sfxSource != null)
+        {
+            if (clip == hitSound)
+            {
+                if (lastHitFrame == Time.frameCount) return;
+                lastHitFrame = Time.frameCount;
+            }
+            else if (clip == missSound)
+            {
+                if (lastMissFrame == Time.frameCount) return;
+                lastMissFrame = Time.frameCount;
+            }
+
+            sfxSource.PlayOneShot(clip);
+        }
+    }
+
+    // ฟังก์ชันสำหรับเสียงกดเปล่าๆ (ตัดเสียงเก่าทิ้ง ป้องกันเสียงซ้อนกันจนดังเกินไป)
+    private void PlayTapSFX()
+    {
+        if (keyPressSound != null && tapSource != null)
+        {
+            if (lastTapFrame == Time.frameCount) return;
+            lastTapFrame = Time.frameCount;
+
+            tapSource.clip = keyPressSound;
+            tapSource.Play(); 
         }
     }
 }

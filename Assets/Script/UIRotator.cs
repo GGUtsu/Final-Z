@@ -1,14 +1,17 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIRotator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIRotator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     [Header("Rotation Settings")]
     [Tooltip("ความเร็วในการหมุน (ค่าลบ = ตามเข็มนาฬิกา)")]
     public float rotationSpeed = -100f;
 
-    [Tooltip("ให้หมุนเฉพาะตอนเอาเมาส์ไปชี้ (Hover) ใช่หรือไม่?")]
+    [Tooltip("ให้หมุนเฉพาะตอนเอาเมาส์ไปชี้ (Hover) หรือคลิกค้าง ใช่หรือไม่?")]
     public bool spinOnlyWhenHover = true;
+    
+    [Tooltip("ให้เล่นเพลงเฉพาะตอนเอาเมาส์คลิกค้างไว้ ใช่หรือไม่? (ถ้าปิดคือแค่เอาเมาส์ชี้ก็เล่นเลย)")]
+    public bool playOnClick = true;
 
     [Tooltip("เมื่อเอาเมาส์ออก ให้หมุนกลับไปที่มุมเดิมแบบนุ่มนวลหรือไม่?")]
     public bool returnToOriginal = true;
@@ -67,7 +70,7 @@ public class UIRotator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (spinOnlyWhenHover)
+        if (spinOnlyWhenHover && !playOnClick)
         {
             StartSpinning();
         }
@@ -75,7 +78,23 @@ public class UIRotator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (spinOnlyWhenHover)
+        if (spinOnlyWhenHover && !playOnClick)
+        {
+            StopSpinning();
+        }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (playOnClick)
+        {
+            StartSpinning();
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (playOnClick)
         {
             StopSpinning();
         }
@@ -84,6 +103,10 @@ public class UIRotator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private void StartSpinning()
     {
         isSpinning = true;
+
+        // สั่งหยุดเพลงหลักของฉาก
+        SceneController sc = FindObjectOfType<SceneController>();
+        if (sc != null) sc.PauseBGM();
 
         // เล่นเพลงเมื่อเริ่มหมุน
         if (spinMusic != null)
@@ -116,5 +139,9 @@ public class UIRotator : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 audioSource.Pause();
             }
         }
+
+        // สั่งเล่นเพลงหลักของฉากต่อ
+        SceneController sc = FindObjectOfType<SceneController>();
+        if (sc != null) sc.ResumeBGM();
     }
 }

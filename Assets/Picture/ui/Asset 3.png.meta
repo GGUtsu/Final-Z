@@ -1,28 +1,34 @@
 fileFormatVersion: 2
-guid: 6d5afbc80d61215489b6594ba6f68719
+guid: 1336f0332f3054141b62852212e90a88
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3890952855756807539
-    second: IMG_2586_0
+      213: 8302129328904623997
+    second: Asset 3_0
   - first:
-      213: 2354953779816175321
-    second: IMG_2586_1
+      213: -5648520295195263990
+    second: Asset 3_1
   - first:
-      213: 1216921161432201103
-    second: IMG_2586_2
+      213: -8620834804588372882
+    second: Asset 3_2
   - first:
-      213: 7249534260642158559
-    second: IMG_2586_3
+      213: 2006287687248326889
+    second: Asset 3_3
   - first:
-      213: 8547468357683863539
-    second: IMG_2586_4
+      213: -4193749259656298723
+    second: Asset 3_4
   - first:
-      213: -3179728434672776451
-    second: IMG_2586_5
+      213: 956055211060798518
+    second: Asset 3_5
   - first:
-      213: -8142437416074384546
-    second: IMG_2586_6
+      213: 4637492934741545019
+    second: Asset 3_6
+  - first:
+      213: -6681079611958751851
+    second: Asset 3_7
+  - first:
+      213: -8969919445147161017
+    second: Asset 3_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -64,7 +70,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -118,155 +124,199 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_2586_0
+      name: Asset 3_0
       rect:
         serializedVersion: 2
-        x: 290
-        y: 972
-        width: 499
-        height: 421
+        x: 0
+        y: 1
+        width: 203
+        height: 194
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d82e2da2efe800ac0800000000000000
-      internalID: -3890952855756807539
+      spriteID: d7756b853a6173370800000000000000
+      internalID: 8302129328904623997
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_2586_1
+      name: Asset 3_1
       rect:
         serializedVersion: 2
-        x: 1058
-        y: 972
-        width: 387
-        height: 450
+        x: 239
+        y: 0
+        width: 198
+        height: 198
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9d618645cf97ea020800000000000000
-      internalID: 2354953779816175321
+      spriteID: a0c3d4af7bc6c91b0800000000000000
+      internalID: -5648520295195263990
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_2586_2
+      name: Asset 3_2
       rect:
         serializedVersion: 2
-        x: 85
-        y: 509
-        width: 759
-        height: 388
+        x: 472
+        y: 12
+        width: 158
+        height: 196
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f8772da495f53e010800000000000000
-      internalID: 1216921161432201103
+      spriteID: e6c9f2d9b64ac5880800000000000000
+      internalID: -8620834804588372882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_2586_3
+      name: Asset 3_3
       rect:
         serializedVersion: 2
-        x: 1445
-        y: 286
-        width: 54
-        height: 87
+        x: 647
+        y: 10
+        width: 137
+        height: 200
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd7999810058b9460800000000000000
-      internalID: 7249534260642158559
+      spriteID: 9e03da39504c7db10800000000000000
+      internalID: 2006287687248326889
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_2586_4
+      name: Asset 3_4
       rect:
         serializedVersion: 2
-        x: 1429
-        y: 261
-        width: 13
-        height: 20
+        x: 802
+        y: 18
+        width: 152
+        height: 192
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3ff53a45f25be9670800000000000000
-      internalID: 8547468357683863539
+      spriteID: d1ff02d844fccc5c0800000000000000
+      internalID: -4193749259656298723
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_2586_5
+      name: Asset 3_5
       rect:
         serializedVersion: 2
-        x: 1404
-        y: 218
-        width: 20
-        height: 26
+        x: 1090
+        y: 11
+        width: 167
+        height: 194
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dface19e5d55fd3d0800000000000000
-      internalID: -3179728434672776451
+      spriteID: 634a0f82627944d00800000000000000
+      internalID: 956055211060798518
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_2586_6
+      name: Asset 3_6
       rect:
         serializedVersion: 2
-        x: 1328
-        y: 52
-        width: 71
-        height: 147
+        x: 1271
+        y: 21
+        width: 137
+        height: 198
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e5b69018f40400f80800000000000000
-      internalID: -8142437416074384546
+      spriteID: b3057afe04fab5040800000000000000
+      internalID: 4637492934741545019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Asset 3_7
+      rect:
+        serializedVersion: 2
+        x: 1422
+        y: 22
+        width: 157
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59d0815ad790843a0800000000000000
+      internalID: -6681079611958751851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Asset 3_8
+      rect:
+        serializedVersion: 2
+        x: 1582
+        y: 20
+        width: 165
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74e62201ac1748380800000000000000
+      internalID: -8969919445147161017
       vertices: []
       indices: 
       edges: []
@@ -275,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 273a200754798354d9bf3555c511ab40
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -285,13 +335,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_2586_0: -3890952855756807539
-      IMG_2586_1: 2354953779816175321
-      IMG_2586_2: 1216921161432201103
-      IMG_2586_3: 7249534260642158559
-      IMG_2586_4: 8547468357683863539
-      IMG_2586_5: -3179728434672776451
-      IMG_2586_6: -8142437416074384546
+      Asset 3_0: 8302129328904623997
+      Asset 3_1: -5648520295195263990
+      Asset 3_2: -8620834804588372882
+      Asset 3_3: 2006287687248326889
+      Asset 3_4: -4193749259656298723
+      Asset 3_5: 956055211060798518
+      Asset 3_6: 4637492934741545019
+      Asset 3_7: -6681079611958751851
+      Asset 3_8: -8969919445147161017
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

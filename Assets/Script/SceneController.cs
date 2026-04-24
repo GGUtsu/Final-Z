@@ -72,4 +72,22 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    // ฟังก์ชันสำหรับสั่งหยุด BGM ฉากชั่วคราว
+    public void PauseBGM()
+    {
+        if (bgmSource != null && bgmSource.isPlaying)
+        {
+            bgmSource.Pause();
+        }
+    }
+
+    // ฟังก์ชันสำหรับสั่งเล่น BGM ฉากต่อ
+    public void ResumeBGM()
+    {
+        if (bgmSource != null && !bgmSource.isPlaying)
+        {
+            bgmSource.Play();
+        }
+    }
 }

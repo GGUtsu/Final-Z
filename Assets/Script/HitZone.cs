@@ -12,6 +12,9 @@ public class HitZone : MonoBehaviour
     public Color defaultColor = Color.white; // สีปกติตอนไม่ได้กด
     public Color pressedColor = Color.gray;  // สีที่จะเปลี่ยนตอนนิ้วกดลงไป
 
+    [Header("ตั้งค่าเอฟเฟกต์ (Particles)")]
+    public GameObject hitParticlePrefab; // ลาก Prefab พาร์ติเคิลตอนตีโดนมาใส่ช่องนี้
+
     [Header("ตั้งค่าเสียง (Sound Effects)")]
     public AudioClip keyPressSound; // เสียงตอนกดปุ่มเปล่าๆ
     public AudioClip hitSound;      // เสียงตอนตีโดนโน้ต (Perfect/Great)
@@ -56,6 +59,7 @@ public class HitZone : MonoBehaviour
                         GameManager.instance.ShowJudgment("Perfect", transform); 
                     }
                     PlaySFX(hitSound);
+                    SpawnHitParticle(noteToHit.transform.position);
                 }
                 else if (distance <= 1.2f)
                 {
@@ -66,6 +70,7 @@ public class HitZone : MonoBehaviour
                         GameManager.instance.ShowJudgment("Great", transform); 
                     }
                     PlaySFX(hitSound);
+                    SpawnHitParticle(noteToHit.transform.position);
                 }
                 else 
                 {
@@ -158,6 +163,26 @@ public class HitZone : MonoBehaviour
 
             tapSource.clip = keyPressSound;
             tapSource.Play(); 
+        }
+    }
+
+    // ฟังก์ชันสร้าง Particle ตอนตีโดนโน้ต
+    private void SpawnHitParticle(Vector3 spawnPos)
+    {
+        if (hitParticlePrefab != null)
+        {
+            // สร้าง Particle ณ ตำแหน่งของโน้ตที่ถูกตีแตก
+            GameObject particleObj = Instantiate(hitParticlePrefab, spawnPos, Quaternion.identity);
+            
+            // บังคับให้เล่น Particle ทันที (แก้ปัญหาโคลนมาแล้วไม่ยอมเล่น ถ้าลืมติ๊ก Play On Awake)
+            ParticleSystem ps = particleObj.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                ps.Play(true); // สั่งเล่นพร้อมกับตัวลูกทั้งหมด
+            }
+
+            // ตั้งเวลาให้มันทำลายตัวเองทิ้งภายใน 2 วินาที (กันขยะล้นฉาก)
+            Destroy(particleObj, 2f); 
         }
     }
 }

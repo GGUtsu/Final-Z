@@ -1463,7 +1463,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c560ffd6abf84224c80a82e528b68776, type: 3}
-  m_Color: {r: 1, g: 0.9626852, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1517,7 +1517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116940be8d945b8499f92e8a67fb0b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BackgroundScroller
-  backgroundPrefab: {fileID: 5633382717767414079, guid: f68263594bc048746b4b436173fa1d78, type: 3}
+  backgroundPrefab: {fileID: 6728045916446122267, guid: 176e131d9816c8c4cada621bbe9a8d26, type: 3}
   scrollSpeed: 5
   backgroundWidth: 0
   destroyX: -25
@@ -1791,8 +1791,8 @@ MonoBehaviour:
   hitKey: 102
   laneName: 
   buttonGraphic: {fileID: 1945649440}
-  defaultColor: {r: 0.08018869, g: 1, b: 0.91196984, a: 1}
-  pressedColor: {r: 0.23113209, g: 0.46788242, b: 1, a: 1}
+  defaultColor: {r: 0.98655224, g: 0.2688679, b: 1, a: 1}
+  pressedColor: {r: 0.5283019, g: 0, b: 0.5202744, a: 1}
   hitParticlePrefab: {fileID: 5425414243735962021, guid: 6d04e7390c7c4e341a6cc777783c1ef4, type: 3}
   keyPressSound: {fileID: 8300000, guid: 65f066acc4b670f4094103ee18d6cb16, type: 3}
   hitSound: {fileID: 8300000, guid: 278f2e55536b0c34cbbee4c2d754ff96, type: 3}
@@ -2623,8 +2623,8 @@ MonoBehaviour:
   hitKey: 107
   laneName: 
   buttonGraphic: {fileID: 411803726}
-  defaultColor: {r: 1, g: 0.9487236, b: 0.5330188, a: 1}
-  pressedColor: {r: 1, g: 0.3563676, b: 0, a: 1}
+  defaultColor: {r: 0.9882353, g: 0.27058825, b: 1, a: 1}
+  pressedColor: {r: 0.3679245, g: 0, b: 0.14394806, a: 1}
   hitParticlePrefab: {fileID: 5425414243735962021, guid: 6d04e7390c7c4e341a6cc777783c1ef4, type: 3}
   keyPressSound: {fileID: 8300000, guid: 65f066acc4b670f4094103ee18d6cb16, type: 3}
   hitSound: {fileID: 8300000, guid: 278f2e55536b0c34cbbee4c2d754ff96, type: 3}
@@ -3250,8 +3250,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294294527
+  m_fontColor: {r: 1, g: 0.73333335, b: 0.9607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5342,7 +5342,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: e8c61e740301407478c3a902ef6c4402, type: 3}
+  m_Resource: {fileID: 8300000, guid: 44c43921644fcd4498e3e1223beac084, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -5445,9 +5445,9 @@ MonoBehaviour:
   - {fileID: 1753326799}
   - {fileID: 2031309605}
   notePrefabs:
-  - {fileID: 4665161017207194532, guid: a18a85d5867e51c4586743aab4705a24, type: 3}
-  - {fileID: 8561117163768185901, guid: 5c2b2d478c0a36a4fbfe8a59391091f7, type: 3}
-  - {fileID: 3005314560006847184, guid: a941ba99be944e2498b7f415f53a1f4d, type: 3}
+  - {fileID: 4479297824234910413, guid: db1cd79bfc86cba4db006e761ae87555, type: 3}
+  - {fileID: 5950081787460508634, guid: a192edd30752abe459c8477500d8aaf4, type: 3}
+  - {fileID: 8785759408586432355, guid: d30cf913ac6a41f44869a8565dd59d0b, type: 3}
   audioSource: {fileID: 1585361375}
   sampleSize: 64
   startSpeed: 5
@@ -5537,7 +5537,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: -8068497270358892036, guid: 876c385c814b8bc4ab8201434eca0555, type: 3}
+  m_Sprite: {fileID: 7627598838963537902, guid: 6f49e4a34907ba84eb2439ad0c0cde6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6100,8 +6100,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294228735
+  m_fontColor: {r: 1, g: 0.7311321, b: 0.9588221, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -6760,7 +6760,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000011444092, y: 352.03918}
+  m_AnchoredPosition: {x: 29.881481, y: 352.03918}
   m_SizeDelta: {x: 3763.892, y: 1088}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2013168937
@@ -7274,6 +7274,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6525343807271174137, guid: f68263594bc048746b4b436173fa1d78, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 28463a7723f384b4db8e96484cf192da, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

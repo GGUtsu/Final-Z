@@ -134,7 +134,7 @@ GameObject:
   m_Layer: 5
   m_Name: Map2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -147,14 +147,14 @@ RectTransform:
   m_GameObject: {fileID: 15885123}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.9548, y: 4.9548, z: 4.9548}
+  m_LocalScale: {x: 2.7963653, y: 4.521255, z: 4.9548}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2134037855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 378, y: -85}
+  m_AnchoredPosition: {x: 376, y: -107}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &15885125
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.09411765}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -537,10 +537,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1842596126}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+      - m_Target: {fileID: 1842596124}
+        m_TargetAssemblyTypeName: SongSelectionMenu, Assembly-CSharp
+        m_MethodName: ResetAllHighScores
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -693,7 +693,7 @@ GameObject:
   m_Layer: 5
   m_Name: Map3
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -706,14 +706,14 @@ RectTransform:
   m_GameObject: {fileID: 151669476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.9548, y: 4.9548, z: 4.9548}
+  m_LocalScale: {x: 2.7963653, y: 4.521255, z: 4.9548}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2134037855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 378, y: -278}
+  m_AnchoredPosition: {x: 376, y: -294}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &151669478
@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.09411765}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2984,7 +2984,7 @@ GameObject:
   m_Layer: 5
   m_Name: Map1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2997,14 +2997,14 @@ RectTransform:
   m_GameObject: {fileID: 1784664444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.9548, y: 4.9548, z: 4.9548}
+  m_LocalScale: {x: 2.7963653, y: 4.521255, z: 4.9548}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2134037855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 378, y: 95}
+  m_AnchoredPosition: {x: 376, y: 85}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1784664446
@@ -3076,7 +3076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.09411765}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3462,9 +3462,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 663919239}
-  - {fileID: 1784664445}
-  - {fileID: 15885124}
-  - {fileID: 151669477}
   - {fileID: 1711554043}
   - {fileID: 592048048}
   - {fileID: 1235390172}
@@ -3483,6 +3480,9 @@ RectTransform:
   - {fileID: 74772924}
   - {fileID: 289157254}
   - {fileID: 448912653}
+  - {fileID: 1784664445}
+  - {fileID: 15885124}
+  - {fileID: 151669477}
   - {fileID: 952739018}
   - {fileID: 1422464959}
   m_Father: {fileID: 0}

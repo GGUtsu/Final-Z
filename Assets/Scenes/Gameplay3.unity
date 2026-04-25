@@ -1788,7 +1788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dac187b4fdbb72459e03d59758abb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitZone
-  hitKey: 102
+  hitKeys: 660000006400000073000000
   laneName: 
   buttonGraphic: {fileID: 1945649440}
   defaultColor: {r: 0.08018869, g: 1, b: 0.91196984, a: 1}
@@ -2620,7 +2620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dac187b4fdbb72459e03d59758abb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitZone
-  hitKey: 107
+  hitKeys: 6a0000006b0000006c000000
   laneName: 
   buttonGraphic: {fileID: 411803726}
   defaultColor: {r: 1, g: 0.9487236, b: 0.5330188, a: 1}
@@ -3447,6 +3447,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   anim: {fileID: 1099725592}
+  topLaneKeys: 640000006600000073000000
+  bottomLaneKeys: 6b0000006a0000006c000000
   attackTopTrigger: AttackTop
   attackBottomTrigger: AttackBottom
   idleStateName: Idle

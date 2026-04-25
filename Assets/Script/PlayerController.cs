@@ -5,6 +5,10 @@ public class PlayerController : MonoBehaviour
     [Header("การตั้งค่าแอนิเมชัน")]
     public Animator anim; // ลากตัวละครที่มี Animator มาใส่ช่องนี้
 
+    [Header("ปุ่มกดสำหรับโจมตี (ตั้งให้ตรงกับ HitZone)")]
+    public KeyCode[] topLaneKeys = { KeyCode.F };
+    public KeyCode[] bottomLaneKeys = { KeyCode.K };
+
     [Header("ชื่อ Trigger ใน Animator")]
     public string attackTopTrigger = "AttackTop";    // ชื่อ Trigger สำหรับท่ากด F
     public string attackBottomTrigger = "AttackBottom"; // ชื่อ Trigger สำหรับท่ากด K
@@ -14,12 +18,33 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F)) 
+        bool topPressed = false;
+        bool bottomPressed = false;
+
+        // เช็คปุ่มเลนบน
+        if (topLaneKeys != null)
+        {
+            foreach (KeyCode key in topLaneKeys)
+            {
+                if (Input.GetKeyDown(key)) topPressed = true;
+            }
+        }
+
+        // เช็คปุ่มเลนล่าง
+        if (bottomLaneKeys != null)
+        {
+            foreach (KeyCode key in bottomLaneKeys)
+            {
+                if (Input.GetKeyDown(key)) bottomPressed = true;
+            }
+        }
+
+        // สั่งโจมตี
+        if (topPressed) 
         {
             AttackLane("Top");
         }
-        // เปลี่ยนจากปุ่ม J เป็น K ตามที่คุณขอครับ
-        else if (Input.GetKeyDown(KeyCode.K)) 
+        else if (bottomPressed) 
         {
             AttackLane("Bottom");
         }

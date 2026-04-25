@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class HitZone : MonoBehaviour
 {
-    [Header("ตั้งค่าปุ่มกด")]
-    public KeyCode hitKey;
+    [Header("ตั้งค่าปุ่มกด (ใส่ได้หลายปุ่ม เช่น F, D, S)")]
+    public KeyCode[] hitKeys;
     public string laneName;
 
     [Header("ตั้งค่าภาพเป้ารับโน้ต (Visual)")]
@@ -38,8 +38,23 @@ public class HitZone : MonoBehaviour
 
     void Update()
     {
-        // จังหวะกดปุ่ม
-        if (Input.GetKeyDown(hitKey))
+        bool isHitKeyDown = false;
+        bool isHitKeyUp = false;
+        bool isAnyKeyHeld = false;
+
+        // เช็คทุกปุ่มในอาเรย์
+        if (hitKeys != null)
+        {
+            foreach (KeyCode key in hitKeys)
+            {
+                if (Input.GetKeyDown(key)) isHitKeyDown = true;
+                if (Input.GetKeyUp(key)) isHitKeyUp = true;
+                if (Input.GetKey(key)) isAnyKeyHeld = true;
+            }
+        }
+
+        // จังหวะกดปุ่ม (กดปุ่มไหนก็ได้ใน List)
+        if (isHitKeyDown)
         {
             if (buttonGraphic != null) buttonGraphic.color = pressedColor; 
 
@@ -97,8 +112,8 @@ public class HitZone : MonoBehaviour
             }
         }
 
-        // จังหวะปล่อยปุ่ม
-        if (Input.GetKeyUp(hitKey))
+        // จังหวะปล่อยปุ่ม (เช็คให้แน่ใจว่าไม่ได้กดปุ่มอื่นค้างอยู่ ถึงจะเปลี่ยนสีกลับ)
+        if (isHitKeyUp && !isAnyKeyHeld)
         {
             if (buttonGraphic != null) buttonGraphic.color = defaultColor;
         }

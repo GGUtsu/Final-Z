@@ -71,4 +71,25 @@ public class SongSelectionMenu : MonoBehaviour
             Debug.LogWarning("SongSelectionMenu: ยังไม่ได้ตั้งค่าชื่อ Scene ของ Main Menu");
         }
     }
+
+    // ฟังก์ชันสำหรับปุ่ม Reset คะแนนทั้งหมด
+    public void ResetAllHighScores()
+    {
+        if (songs != null)
+        {
+            // วนลูปตั้งค่าคะแนนของทุกเพลงในลิสต์ให้เป็น 0
+            foreach (SongData song in songs)
+            {
+                if (!string.IsNullOrEmpty(song.sceneToLoad))
+                {
+                    string key = "HighScore_" + song.sceneToLoad;
+                    PlayerPrefs.DeleteKey(key); // ลบคะแนนทิ้ง
+                }
+            }
+            PlayerPrefs.Save(); // บันทึกการลบ
+
+            // รีโหลดหน้านี้ใหม่ เพื่อให้ตัวเลขคะแนนที่โชว์อยู่บนจออัปเดตกลับเป็น 0
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
 }

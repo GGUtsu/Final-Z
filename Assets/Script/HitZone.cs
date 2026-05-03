@@ -92,7 +92,7 @@ public class HitZone : MonoBehaviour
                     // Miss (กดตอนโน้ตอยู่ในกรอบจริง แต่กะจังหวะพลาดไปเยอะ = กดเร็วไป/ช้าไป)
                     if(GameManager.instance != null) {
                         GameManager.instance.ResetCombo(); 
-                        GameManager.instance.TakeDamage(10); 
+                        GameManager.instance.TakeDamage(2); 
                         GameManager.instance.ShowJudgment("Miss", transform); 
                     }
                     PlaySFX(missSound);
@@ -138,8 +138,8 @@ public class HitZone : MonoBehaviour
                 GameManager.instance.ResetCombo(); // ตัดคอมโบ
                 GameManager.instance.ShowJudgment("Miss", transform); // โชว์รูป Miss
 
-                // --- เพิ่มคำสั่งลดเลือด 10 หน่วย ตรงนี้ครับ! ---
-                GameManager.instance.TakeDamage(10); 
+                // --- เพิ่มคำสั่งลดเลือด 2 หน่วย ตรงนี้ครับ! ---
+                GameManager.instance.TakeDamage(2); 
             }
 
             PlaySFX(missSound); // เล่นเสียงพลาดเมื่อโน้ตหลุดขอบจอ
